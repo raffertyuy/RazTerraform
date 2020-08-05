@@ -2,6 +2,7 @@
 This repo is inspired by the [Azure Terraform Quickstart Templates](https://aka.ms/terraformquickstart).
 
 Intent is to create various templates as I work on different projects.
+Unless otherwise specified, the templates default to the lowest pricing tiers available.
 
 ## Folder Naming Standard
 
