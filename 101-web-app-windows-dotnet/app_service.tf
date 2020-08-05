@@ -17,8 +17,8 @@ resource "azurerm_app_service" "default" {
   app_service_plan_id = azurerm_app_service_plan.default.id
 
   site_config {
-    always_on                = false # Free Tier does not support true
+    always_on                = var.webapp_always_on
     dotnet_framework_version = "v4.0"
-    use_32_bit_worker_process = true # Free Tier requires 32 bit
+    use_32_bit_worker_process = var.webapp_use_32_bit_worker_process
   }
 }

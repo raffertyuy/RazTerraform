@@ -34,6 +34,12 @@ variable "plan_sku" {
   default     = "F1"
 }
 
+variable "webapp_always_on" {
+  type        = bool
+  description = "Should the app service run in 32-bit rather than 64-bit mode. If using Free or Shared tier, this should be set to true."
+  default     = false
+}
+
 variable "webapp_use_32_bit_worker_process" {
   type        = bool
   description = "Should the app service run in 32-bit rather than 64-bit mode. If using Free or Shared tier, this should be set to true."
