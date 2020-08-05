@@ -19,7 +19,7 @@ variable "location" {
 variable "dns_prefix" {
   type        = string
   description = "A prefix for any dns based resources"
-  default     = "raz"
+  default     = "raztf"
 }
 
 variable "plan_tier" {
