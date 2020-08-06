@@ -1,3 +1,23 @@
+variable "subscription_id" {
+  type        = string
+  description = "The subscription ID"
+}
+
+variable "service_principal_client_id" {
+  type        = string
+  description = "The client/app id of the service principal"
+}
+
+variable "service_principal_client_secret" {
+  type        = string
+  description = "The client secret of the service principal"
+}
+
+variable "service_principal_tenant_id" {
+  type        = string
+  description = "The directory/tenant id of the service principal"
+}
+
 variable "name" {
   type        = string
   description = "Location of the azure resource group."
