@@ -16,7 +16,7 @@ Changes from the source are:
 |-|-|
 | name | Name of the deployment |
 | environment | The depolyment environment name (used for postfixing resource names) |
-| dns_prefix | A prefix for globally-unique dns-based resources |
+| prefix | A prefix for globally-unique dns-based resources |
 | location | The Azure Region to deploy these resources in |
 | plan_tier | The App Service Plan tier to deploy |
 | plan_sku | The App Service Plan SKU to deploy |

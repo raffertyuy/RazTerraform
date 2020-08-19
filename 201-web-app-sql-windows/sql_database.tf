@@ -1,5 +1,5 @@
 resource "azurerm_sql_server" "default" {
-  name                         = "${var.dns_prefix}${var.name}sqlsvr"
+  name                         = "${var.prefix}${var.name}sqlsvr"
   resource_group_name          = azurerm_resource_group.default.name
   location                     = azurerm_resource_group.default.location
   version                      = var.sql_version
@@ -8,7 +8,7 @@ resource "azurerm_sql_server" "default" {
 }
 
 resource "azurerm_mssql_database" "default" {
-  name                = "${var.dns_prefix}${var.name}sqldb"
+  name                = "${var.prefix}${var.name}sqldb"
   server_id           = azurerm_sql_server.default.id
   sku_name            = var.sql_sku_name
 

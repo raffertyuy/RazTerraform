@@ -36,7 +36,7 @@ variable "location" {
   default     = "Southeast Asia"
 }
 
-variable "dns_prefix" {
+variable "prefix" {
   type        = string
   description = "A prefix for any dns based resources"
   default     = "raztf"

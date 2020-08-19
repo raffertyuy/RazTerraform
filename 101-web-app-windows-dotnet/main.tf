@@ -10,6 +10,6 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "default" {
-  name     = "${var.name}-${var.environment}-rg"
+  name     = "${var.prefix}-${var.name}-rg"
   location = var.location
 }
