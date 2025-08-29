@@ -121,7 +121,7 @@ Each example template follows a consistent structure with the following files:
 
 | File | Purpose | Description |
 |------|---------|-------------|
-| `readme.md` | **Template Documentation** | Comprehensive guide for the specific template |
+| `README.md` | **Template Documentation** | Comprehensive guide for the specific template |
 | `terraform.tfvars` | **Variable Configuration** | Default values for all variables, ready to customize |
 
 #### Environment Setup Files (Required)
@@ -364,7 +364,7 @@ tags = {
 }
 ```
 
-#### 5.2 `readme.md` Template
+#### 5.2 `README.md` Template
 
 ```markdown
 # [Template Title]
