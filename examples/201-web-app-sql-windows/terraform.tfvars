@@ -1,7 +1,7 @@
 # terraform.tfvars file
 # Customize these values for your deployment
 
-name        = "mywebapp"
+name        = "mywebapp-sql"
 environment = "dev"
 location    = "Southeast Asia"
 prefix      = "raztf"
