@@ -3,6 +3,9 @@
 *secrets.*
 *.secrets.*
 
+# Environment files
+.env
+
 # Local .terraform directories (downloaded providers and modules)
 **/.terraform/*
 

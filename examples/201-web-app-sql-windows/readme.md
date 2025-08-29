@@ -24,14 +24,47 @@ This template creates:
 
 1. Clone this repository
 2. Navigate to this template directory
-3. Customize the variables in `terraform.tfvars` as needed (especially SQL credentials)
-4. Run the following commands:
+3. **Set up Azure authentication:**
+   - Copy `.env.example` to `.env`
+   - Update `.env` with your Azure subscription ID
+   - Load environment variables: `.\load-env.ps1` (PowerShell) or source the variables manually
+4. Customize the variables in `terraform.tfvars` as needed (especially SQL credentials)
+5. Run the following commands:
 
 ```bash
 terraform init
 terraform plan
 terraform apply
 ```
+
+### Environment Variables Setup
+
+This template requires your Azure subscription ID to be set as an environment variable. You have two options:
+
+#### Option 1: Using the provided scripts (Recommended)
+
+```powershell
+# Copy the example file and edit with your values
+cp .env.example .env
+# Edit .env file with your subscription ID
+
+# Load environment variables (local script)
+.\load-env.ps1
+
+# Or use the centralized script directly
+..\..\scripts\load-env.ps1
+```
+
+#### Option 2: Manual setup
+
+```powershell
+# Set environment variable manually
+$env:ARM_SUBSCRIPTION_ID = "your-subscription-id-here"
+```
+
+**Required Environment Variables:**
+
+- `ARM_SUBSCRIPTION_ID` - Your Azure subscription ID (get it with `az account show --query id -o tsv`)
 
 ## Configuration
 

@@ -10,6 +10,10 @@ RazTerraform/
 ├── docs/                           # Documentation files
 │   └── file_structure.md          # This file
 │
+├── scripts/                       # Shared utility scripts
+│   ├── load-env.ps1               # Centralized environment variable loader
+│   └── README.md                  # Scripts documentation
+│
 ├── .vscode/                       # VS Code workspace configuration
 │   ├── mcp.json                   # Model Context Protocol server configurations
 │   └── tasks.json                 # VS Code tasks for Terraform operations
@@ -22,6 +26,9 @@ RazTerraform/
 │   │   ├── outputs.tf             # Output value definitions
 │   │   ├── app_service.tf         # App Service specific resources
 │   │   ├── terraform.tfvars       # Variable configuration values
+│   │   ├── .env                   # Environment variables (gitignored)
+│   │   ├── .env.example           # Environment variables template
+│   │   ├── load-env.ps1           # Local script wrapper for environment loading
 │   │   └── readme.md              # Template-specific documentation
 │   │
 │   └── 201-web-app-sql-windows/
@@ -32,9 +39,12 @@ RazTerraform/
 │       ├── app_service.tf         # App Service specific resources
 │       ├── sql_database.tf        # SQL Database specific resources
 │       ├── terraform.tfvars       # Variable configuration values
+│       ├── .env                   # Environment variables (gitignored)
+│       ├── .env.example           # Environment variables template
+│       ├── load-env.ps1           # Local script wrapper for environment loading
 │       └── readme.md              # Template-specific documentation
 │
-├── .gitignore                     # Git ignore file for Terraform
+├── .gitignore                     # Git ignore file for Terraform (includes .env)
 └── README.md                      # Main repository documentation
 ```
 
@@ -50,12 +60,20 @@ Templates are organized by complexity level using a numeric prefix system:
 
 This naming convention helps users quickly identify the complexity and scope of each template, making it easier to find the right starting point for their needs.
 
-### Root Level Files
+### Root Level Files and Directories
+
+| File/Directory | Purpose | Required |
+|----------------|---------|----------|
+| `README.md` | Main repository documentation and getting started guide | ✅ Yes |
+| `.gitignore` | Git ignore patterns for Terraform files, secrets, and environment variables | ✅ Yes |
+| `scripts/` | Shared utility scripts used across all examples | 🔧 Recommended |
+
+### Shared Scripts (`scripts/`)
 
 | File | Purpose | Required |
 |------|---------|----------|
-| `README.md` | Main repository documentation and getting started guide | ✅ Yes |
-| `.gitignore` | Git ignore patterns for Terraform files and secrets | ✅ Yes |
+| `load-env.ps1` | Centralized PowerShell script for loading environment variables from .env files | ✅ Yes |
+| `README.md` | Documentation for shared scripts and their usage | 📖 Recommended |
 
 ### VS Code Configuration (`.vscode/`)
 
@@ -99,6 +117,14 @@ Each example template follows a consistent structure with the following files:
 |------|---------|-------------|
 | `readme.md` | **Template Documentation** | Comprehensive guide for the specific template |
 | `terraform.tfvars` | **Variable Configuration** | Default values for all variables, ready to customize |
+
+#### Environment Setup Files (Required)
+
+| File | Purpose | Description |
+|------|---------|-------------|
+| `.env.example` | **Environment Template** | Template file showing required environment variables |
+| `.env` | **Environment Variables** | Actual environment variables (gitignored, created from .env.example) |
+| `load-env.ps1` | **Environment Loader** | Local wrapper script that calls the centralized environment loader |
 
 ## Creating a New Example Template
 
@@ -264,9 +290,53 @@ resource "azurerm_windows_web_app" "default" {
 }
 ```
 
-### Step 4: Create Documentation and Configuration
+### Step 4: Create Environment Setup Files
 
-#### 4.1 `terraform.tfvars`
+#### 4.1 `.env.example` - Environment Variables Template
+
+```bash
+# Azure Terraform Environment Variables
+# Copy this file to .env and fill in your values
+
+# Azure Subscription ID (required)
+ARM_SUBSCRIPTION_ID=your-subscription-id-here
+
+# Optional: Explicitly set tenant ID (usually auto-detected)
+# ARM_TENANT_ID=your-tenant-id
+
+# Optional: Service Principal credentials (if not using Azure CLI)
+# ARM_CLIENT_ID=your-client-id
+# ARM_CLIENT_SECRET=your-client-secret
+```
+
+#### 4.2 `load-env.ps1` - Environment Loader Wrapper
+
+```powershell
+# Load Environment Variables from .env file
+# This script calls the centralized environment loader
+# Usage: .\load-env.ps1
+
+param(
+    [string]$EnvFile = ".env",
+    [switch]$Verbose
+)
+
+# Get the path to the centralized script
+$scriptRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+$centralScript = Join-Path $scriptRoot "scripts\load-env.ps1"
+
+if (Test-Path $centralScript) {
+    & $centralScript -EnvFile $EnvFile -Verbose:$Verbose
+} else {
+    Write-Host "Central load-env.ps1 script not found at: $centralScript" -ForegroundColor Red
+    Write-Host "Please ensure the scripts/load-env.ps1 file exists in the repository root." -ForegroundColor Yellow
+    exit 1
+}
+```
+
+### Step 5: Create Documentation and Configuration
+
+#### 5.1 `terraform.tfvars`
 
 ```hcl
 # terraform.tfvars file
@@ -288,7 +358,7 @@ tags = {
 }
 ```
 
-#### 4.2 `readme.md` Template
+#### 5.2 `readme.md` Template
 
 ```markdown
 # [Template Title]
@@ -312,14 +382,47 @@ This template creates:
 
 1. Clone this repository
 2. Navigate to this template directory
-3. Customize the variables in `terraform.tfvars` as needed
-4. Run the following commands:
+3. **Set up Azure authentication:**
+   - Copy `.env.example` to `.env`
+   - Update `.env` with your Azure subscription ID
+   - Load environment variables: `.\load-env.ps1` (PowerShell) or source the variables manually
+4. Customize the variables in `terraform.tfvars` as needed
+5. Run the following commands:
 
 ```bash
 terraform init
 terraform plan
 terraform apply
 ```
+
+### Environment Variables Setup
+
+This template requires your Azure subscription ID to be set as an environment variable. You have two options:
+
+#### Option 1: Using the provided scripts (Recommended)
+
+```powershell
+# Copy the example file and edit with your values
+cp .env.example .env
+# Edit .env file with your subscription ID
+
+# Load environment variables (local script)
+.\load-env.ps1
+
+# Or use the centralized script directly
+..\..\scripts\load-env.ps1
+```
+
+#### Option 2: Manual setup
+
+```powershell
+# Set environment variable manually
+$env:ARM_SUBSCRIPTION_ID = "your-subscription-id-here"
+```
+
+**Required Environment Variables:**
+
+- `ARM_SUBSCRIPTION_ID` - Your Azure subscription ID (get it with `az account show --query id -o tsv`)
 
 ## Configuration
 
@@ -348,7 +451,7 @@ Describe the cost implications and optimization strategies.
 Any important notes about the template.
 ```
 
-### Step 5: Add VS Code Tasks
+### Step 6: Add VS Code Tasks
 
 Update `.vscode/tasks.json` to include tasks for your new template by following the existing pattern.
 
@@ -378,9 +481,18 @@ Update `.vscode/tasks.json` to include tasks for your new template by following 
 ### Security and Best Practices
 
 1. **No hardcoded secrets** - Use variables or Azure Key Vault references
-2. **Appropriate defaults** - Use cost-optimized defaults
-3. **Tag everything** - Consistent tagging strategy using locals
-4. **Version constraints** - Specify provider and Terraform version requirements
+2. **Environment variables** - Use .env files for sensitive configuration (never commit .env to git)
+3. **Appropriate defaults** - Use cost-optimized defaults
+4. **Tag everything** - Consistent tagging strategy using locals
+5. **Version constraints** - Specify provider and Terraform version requirements
+
+### Environment Variable Management
+
+1. **Always include .env.example** - Provide a template for required environment variables
+2. **Gitignore .env files** - Ensure actual environment files are never committed
+3. **Use centralized loading** - Leverage the shared scripts/load-env.ps1 for consistency
+4. **Document requirements** - Clearly document which environment variables are required
+5. **Provide multiple options** - Support both script-based and manual environment setup
 
 This structure ensures that each template is completely standalone while maintaining consistency across the entire repository.
 

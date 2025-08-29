@@ -11,6 +11,9 @@ Each template is designed to be completely self-contained and deployable indepen
 │   ├── 101-*/            # Basic templates (1-2 services)
 │   ├── 201-*/            # Intermediate templates (3-4 services)
 │   └── 301-*/            # Advanced templates (5+ services)
+├── scripts/               # Shared utility scripts
+│   └── load-env.ps1      # Centralized environment variable loader
+└── docs/                  # Documentation
 ```
 
 Also see the [File Structure Documentation](docs/file_structure.md) for detailed information about the workspace organization and how to create new templates.
@@ -37,8 +40,9 @@ Also see the [File Structure Documentation](docs/file_structure.md) for detailed
 
 1. Choose a template from the `examples/` directory
 2. Navigate to the template directory
-3. Customize the variables in `terraform.tfvars` as needed
-4. Deploy the template:
+3. **Set up Azure authentication** (see below)
+4. Customize the variables in `terraform.tfvars` as needed
+5. Deploy the template:
 
 ```bash
 terraform init
@@ -46,11 +50,42 @@ terraform plan
 terraform apply
 ```
 
-### Authentication
+### Authentication Setup
+
+Each template includes environment variable setup for Azure authentication:
+
+1. **Copy environment configuration:**
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Edit `.env` with your Azure subscription ID:**
+
+   ```bash
+   # Get your subscription ID
+   az account show --query id -o tsv
+   
+   # Add it to .env file
+   ARM_SUBSCRIPTION_ID=your-subscription-id-here
+   ```
+
+3. **Load environment variables:**
+
+   ```powershell
+   # PowerShell (local script)
+   .\load-env.ps1
+   
+   # Or use centralized script
+   ..\..\scripts\load-env.ps1
+   ```
+
+### Authentication Methods
 
 These templates use the AzureRM provider's default authentication methods:
 
 - Azure CLI authentication (recommended for local development)
+- Environment variables (ARM_SUBSCRIPTION_ID, ARM_CLIENT_ID, etc.)
 - Managed Identity (for Azure-hosted environments)
 - Service Principal with client credentials
 - Azure PowerShell authentication
