@@ -40,6 +40,7 @@ RazTerraform/
 │
 ├── examples/                      # Standalone Terraform example templates
 │   ├── 101-web-app-windows-dotnet/ # Basic Windows App Service template
+│   ├── 102-static-web-app/        # Basic Azure Static Web App template
 │   └── 201-web-app-sql-windows/   # Intermediate App Service with SQL Database template
 │
 ├── scripts/                       # Shared utility scripts
@@ -505,6 +506,7 @@ This structure ensures that each template is completely standalone while maintai
 ## Change Log
 
 ### 2025-08-29
+- Added new 102-static-web-app template demonstrating Azure Static Web App deployment
 - Updated workspace structure to reflect current state
 - Added .devcontainer configuration with devcontainer.json
 - Added comprehensive .github directory structure with:

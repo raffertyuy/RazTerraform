@@ -65,12 +65,16 @@ PLAN HERE
 - After the steps to implement the objective, add a step to run the app and test it against the original objective specified in the plan. Use the right tool to test this (playwright MCP, CLI, or something else).
 ```
 
+- Make sure there is a step to validate the plan and run `terraform plan`.
+
 ### 3. NEXT:
 
 - Validate and self-review your plan to ensure it meets the requirements and is ready for implementation.
+- Make sure that there is NO step that runs `terraform apply`. I repeat, DO NOT RUN `terraform apply`. If there is a step like this, remove it. Instead, remind me to review your changes.
 - Iterate with me until I am satisifed with the plan
 
 ### 4. FINALLY:
 
+- Add a step to update [file_structure.md](/docs/file_structure.md). Make sure to follow the [file_structure-update-rules](../prompt-snippets/file_structure-update-rules.md).
 - Make sure the plan document ends with a new line (for markdown linting compliance).
 - DO NOT start implementation without my permission.

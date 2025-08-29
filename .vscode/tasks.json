@@ -186,6 +186,88 @@
             "detail": "Destroy Terraform deployment for 201-web-app-sql-windows example"
         },
         {
+            "label": "102-static-web-app: Init",
+            "type": "shell",
+            "command": "terraform",
+            "args": ["init"],
+            "options": {
+                "cwd": "${workspaceFolder}/examples/102-static-web-app"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Initialize Terraform for 102-static-web-app example"
+        },
+        {
+            "label": "102-static-web-app: Plan",
+            "type": "shell",
+            "command": "terraform",
+            "args": ["plan"],
+            "options": {
+                "cwd": "${workspaceFolder}/examples/102-static-web-app"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Plan Terraform deployment for 102-static-web-app example",
+            "dependsOn": "102-static-web-app: Init"
+        },
+        {
+            "label": "102-static-web-app: Apply",
+            "type": "shell",
+            "command": "terraform",
+            "args": ["apply", "-auto-approve"],
+            "options": {
+                "cwd": "${workspaceFolder}/examples/102-static-web-app"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Apply Terraform deployment for 102-static-web-app example",
+            "dependsOn": "102-static-web-app: Plan"
+        },
+        {
+            "label": "102-static-web-app: Destroy",
+            "type": "shell",
+            "command": "terraform",
+            "args": ["destroy", "-auto-approve"],
+            "options": {
+                "cwd": "${workspaceFolder}/examples/102-static-web-app"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Destroy Terraform deployment for 102-static-web-app example"
+        },
+        {
             "label": "Terraform: Format All",
             "type": "shell",
             "command": "pwsh",
