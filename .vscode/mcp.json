@@ -11,6 +11,15 @@
             "env": {},
             "type": "stdio"
         },
+        "Azure MCP Server": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@azure/mcp@0.0.21",
+                "server",
+                "start"
+            ]
+        },
         "context7": {
           "type": "stdio",
           "command": "npx",

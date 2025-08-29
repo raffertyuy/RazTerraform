@@ -11,8 +11,8 @@ plan_tier = "Free"
 plan_sku  = "F1"
 
 # Web App Configuration
-webapp_always_on                    = false  # Must be false for Free tier
-webapp_use_32_bit_worker_process   = true   # Must be true for Free tier
+webapp_always_on                 = false # Must be false for Free tier
+webapp_use_32_bit_worker_process = true  # Must be true for Free tier
 
 # Tags
 tags = {
