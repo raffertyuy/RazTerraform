@@ -1,0 +1,229 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Terraform: Init All Examples",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-Command",
+                "Get-ChildItem -Path examples -Directory | ForEach-Object { Write-Host \"Initializing $_...\" -ForegroundColor Green; Set-Location $_.FullName; terraform init; Set-Location ../.. }"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Initialize Terraform for all example templates"
+        },
+        {
+            "label": "101-web-app-windows-dotnet: Init",
+            "type": "shell",
+            "command": "terraform",
+            "args": ["init"],
+            "options": {
+                "cwd": "${workspaceFolder}/examples/101-web-app-windows-dotnet"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Initialize Terraform for 101-web-app-windows-dotnet example"
+        },
+        {
+            "label": "101-web-app-windows-dotnet: Plan",
+            "type": "shell",
+            "command": "terraform",
+            "args": ["plan"],
+            "options": {
+                "cwd": "${workspaceFolder}/examples/101-web-app-windows-dotnet"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Plan Terraform deployment for 101-web-app-windows-dotnet example",
+            "dependsOn": "101-web-app-windows-dotnet: Init"
+        },
+        {
+            "label": "101-web-app-windows-dotnet: Apply",
+            "type": "shell",
+            "command": "terraform",
+            "args": ["apply", "-auto-approve"],
+            "options": {
+                "cwd": "${workspaceFolder}/examples/101-web-app-windows-dotnet"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Apply Terraform deployment for 101-web-app-windows-dotnet example",
+            "dependsOn": "101-web-app-windows-dotnet: Plan"
+        },
+        {
+            "label": "101-web-app-windows-dotnet: Destroy",
+            "type": "shell",
+            "command": "terraform",
+            "args": ["destroy", "-auto-approve"],
+            "options": {
+                "cwd": "${workspaceFolder}/examples/101-web-app-windows-dotnet"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Destroy Terraform deployment for 101-web-app-windows-dotnet example"
+        },
+        {
+            "label": "201-web-app-sql-windows: Init",
+            "type": "shell",
+            "command": "terraform",
+            "args": ["init"],
+            "options": {
+                "cwd": "${workspaceFolder}/examples/201-web-app-sql-windows"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Initialize Terraform for 201-web-app-sql-windows example"
+        },
+        {
+            "label": "201-web-app-sql-windows: Plan",
+            "type": "shell",
+            "command": "terraform",
+            "args": ["plan"],
+            "options": {
+                "cwd": "${workspaceFolder}/examples/201-web-app-sql-windows"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Plan Terraform deployment for 201-web-app-sql-windows example",
+            "dependsOn": "201-web-app-sql-windows: Init"
+        },
+        {
+            "label": "201-web-app-sql-windows: Apply",
+            "type": "shell",
+            "command": "terraform",
+            "args": ["apply", "-auto-approve"],
+            "options": {
+                "cwd": "${workspaceFolder}/examples/201-web-app-sql-windows"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Apply Terraform deployment for 201-web-app-sql-windows example",
+            "dependsOn": "201-web-app-sql-windows: Plan"
+        },
+        {
+            "label": "201-web-app-sql-windows: Destroy",
+            "type": "shell",
+            "command": "terraform",
+            "args": ["destroy", "-auto-approve"],
+            "options": {
+                "cwd": "${workspaceFolder}/examples/201-web-app-sql-windows"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Destroy Terraform deployment for 201-web-app-sql-windows example"
+        },
+        {
+            "label": "Terraform: Format All",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-Command",
+                "Get-ChildItem -Path examples -Directory | ForEach-Object { Write-Host \"Formatting $_...\" -ForegroundColor Green; Set-Location $_.FullName; terraform fmt; Set-Location ../.. }"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Format all Terraform files in all examples"
+        },
+        {
+            "label": "Terraform: Validate All",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-Command",
+                "Get-ChildItem -Path examples -Directory | ForEach-Object { Write-Host \"Validating $_...\" -ForegroundColor Green; Set-Location $_.FullName; terraform init -backend=false; terraform validate; Set-Location ../.. }"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Validate all Terraform configurations in all examples"
+        }
+    ]
+}

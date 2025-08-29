@@ -1,26 +1,6 @@
-variable "subscription_id" {
-  type        = string
-  description = "The subscription ID"
-}
-
-variable "service_principal_client_id" {
-  type        = string
-  description = "The client/app id of the service principal"
-}
-
-variable "service_principal_client_secret" {
-  type        = string
-  description = "The client secret of the service principal"
-}
-
-variable "service_principal_tenant_id" {
-  type        = string
-  description = "The directory/tenant id of the service principal"
-}
-
 variable "name" {
   type        = string
-  description = "Location of the azure resource group."
+  description = "Name of the application"
   default     = "mysite"
 }
 
@@ -56,12 +36,18 @@ variable "plan_sku" {
 
 variable "webapp_always_on" {
   type        = bool
-  description = "Should the app service run in 32-bit rather than 64-bit mode. If using Free or Shared tier, this should be set to true."
+  description = "Enable Always On for the web app. Must be false for Free/Shared tiers."
   default     = false
 }
 
 variable "webapp_use_32_bit_worker_process" {
   type        = bool
-  description = "Should the app service run in 32-bit rather than 64-bit mode. If using Free or Shared tier, this should be set to true."
+  description = "Use 32-bit worker process. Required for Free/Shared tiers."
   default     = true
+}
+
+variable "tags" {
+  type        = map(string)
+  description = "A mapping of tags to assign to the resource"
+  default     = {}
 }
