@@ -1,6 +1,6 @@
-# Windows Web App for .NET Applications
+# Windows Web App with SQL Database
 
-This template deploys a simple Windows-based Azure App Service configured for .NET Framework applications. It creates the minimum required resources: a Resource Group, App Service Plan, and Windows Web App.
+This template deploys a Windows-based Azure App Service with an Azure SQL Database. It extends the basic web app template by adding database connectivity for data-driven .NET applications.
 
 ## Architecture
 
@@ -9,6 +9,10 @@ This template creates:
 - Azure Resource Group
 - Azure App Service Plan (Windows-based)
 - Azure Windows Web App configured for .NET Framework
+- Azure SQL Server
+- Azure SQL Database
+- SQL Server firewall rule (to allow Azure services)
+- Connection string configuration for the web app
 
 ## Prerequisites
 
@@ -24,7 +28,7 @@ This template creates:
    - Copy `.env.example` to `.env`
    - Update `.env` with your Azure subscription ID
    - Load environment variables: `.\load-env.ps1` (PowerShell) or source the variables manually
-4. Customize the variables in `terraform.tfvars` as needed
+4. Customize the variables in `terraform.tfvars` as needed (especially SQL credentials)
 5. Run the following commands:
 
 ```bash
@@ -66,7 +70,8 @@ $env:ARM_SUBSCRIPTION_ID = "your-subscription-id-here"
 
 ### Required Variables
 
-None - all variables have sensible defaults.
+- `sql_admin_username` - SQL Server administrator username
+- `sql_admin_password` - SQL Server administrator password (use a strong password)
 
 ### Optional Variables
 
@@ -80,6 +85,8 @@ None - all variables have sensible defaults.
 | plan_sku | App Service Plan SKU | "F1" |
 | webapp_always_on | Enable Always On (false for Free tier) | false |
 | webapp_use_32_bit_worker_process | Use 32-bit worker process (required for Free tier) | true |
+| sql_version | SQL Server version | "12.0" |
+| sql_sku_name | SQL Database SKU | "Basic" |
 | tags | Resource tags | {} |
 
 ## Outputs
@@ -88,19 +95,38 @@ None - all variables have sensible defaults.
 |-|-|
 | webapp_url | The URL of the deployed web application |
 | webapp_name | The name of the web app |
+| sql_server_fqdn | The fully qualified domain name of the SQL server |
+| sql_database_name | The name of the SQL database |
 | resource_group_name | The name of the resource group |
+
+## Database Connection
+
+The web app is automatically configured with a connection string named "DefaultConnection" that points to the created SQL database. You can access this in your .NET application using:
+
+```csharp
+string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+```
+
+## Security Considerations
+
+- Change the default SQL administrator password to a strong, unique password
+- Consider implementing Azure AD authentication for the SQL database
+- The SQL Server allows access from Azure services by default (0.0.0.0 firewall rule)
+- For production environments, configure more restrictive firewall rules
 
 ## Cost Optimization
 
-This template is configured to use the Free tier (F1 SKU) by default, which provides:
+This template is configured to use minimal SKUs by default:
 
-- 1 GB disk space
-- Up to 1 GB RAM
-- 60 CPU minutes per day
-- Custom domain support (but no SSL)
+- App Service Plan: Free (F1) - Free tier
+- SQL Database: Basic - Lowest paid tier for SQL Database
+
+**Note**: SQL Database Basic tier costs approximately $5/month and does not have a free tier option.
 
 ## Notes
 
-- Free tier does not support Always On, so it's set to false by default
+- Free tier App Service does not support Always On, so it's set to false by default
 - Free tier requires 32-bit worker process
-- The web app will be accessible at `https://{prefix}-{name}-{environment}-webapp.azurewebsites.net`
+- The web app will be accessible at `https://{prefix}-{name}-{environment}-app.azurewebsites.net`
+- The SQL Server name will be `sql-{name}-{environment}`
+- The SQL Database name will be `sqldb-{name}-{environment}`

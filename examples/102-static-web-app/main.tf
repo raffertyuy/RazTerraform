@@ -1,12 +1,15 @@
 provider "azurerm" {
-  features {}
+  features {
+    resource_group {
+      prevent_deletion_if_contains_resources = false
+    }
+  }
 }
 
 locals {
   # Azure-compliant naming with proper abbreviations and consistent pattern
-  resource_group_name   = "rg-${var.name}-${var.environment}"
-  app_service_plan_name = "asp-${var.name}-${var.environment}"
-  webapp_name           = "${var.prefix}-${var.name}-${var.environment}-app"
+  resource_group_name = "rg-${var.name}-${var.environment}"
+  static_web_app_name = "${var.prefix}-${var.name}-${var.environment}"
 
   common_tags = merge(var.tags, {
     environment = var.environment

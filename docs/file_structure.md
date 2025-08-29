@@ -40,6 +40,7 @@ RazTerraform/
 │
 ├── examples/                      # Standalone Terraform example templates
 │   ├── 101-web-app-windows-dotnet/ # Basic Windows App Service template
+│   ├── 102-static-web-app/        # Basic Azure Static Web App template
 │   └── 201-web-app-sql-windows/   # Intermediate App Service with SQL Database template
 │
 ├── scripts/                       # Shared utility scripts
@@ -121,7 +122,7 @@ Each example template follows a consistent structure with the following files:
 
 | File | Purpose | Description |
 |------|---------|-------------|
-| `readme.md` | **Template Documentation** | Comprehensive guide for the specific template |
+| `README.md` | **Template Documentation** | Comprehensive guide for the specific template |
 | `terraform.tfvars` | **Variable Configuration** | Default values for all variables, ready to customize |
 
 #### Environment Setup Files (Required)
@@ -364,7 +365,7 @@ tags = {
 }
 ```
 
-#### 5.2 `readme.md` Template
+#### 5.2 `README.md` Template
 
 ```markdown
 # [Template Title]
@@ -505,6 +506,7 @@ This structure ensures that each template is completely standalone while maintai
 ## Change Log
 
 ### 2025-08-29
+- Added new 102-static-web-app template demonstrating Azure Static Web App deployment
 - Updated workspace structure to reflect current state
 - Added .devcontainer configuration with devcontainer.json
 - Added comprehensive .github directory structure with:

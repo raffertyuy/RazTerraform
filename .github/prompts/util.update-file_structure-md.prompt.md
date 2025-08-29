@@ -1,5 +1,5 @@
 ---
-mode: "agent"
+mode: "aztf-agent"
 description: "Updates `docs/file_structure.md` according to the latest."
 ---
 
