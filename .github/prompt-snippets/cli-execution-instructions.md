@@ -1,4 +1,4 @@
-When running commands, always do so from the root of the project directory and not within a subdirectory.
+# CLI Execution Instructions
 
 When running commands, be mindful of the operating system as the paths and environment variables may differ. Use relative paths when possible.
 

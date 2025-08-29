@@ -7,45 +7,51 @@ This document explains the file and folder structure of the RazTerraform workspa
 ```text
 RazTerraform/
 │
-├── docs/                           # Documentation files
-│   └── file_structure.md          # This file
+├── .devcontainer/                  # Dev Container configuration
+│   └── devcontainer.json          # Container development environment setup
 │
-├── scripts/                       # Shared utility scripts
-│   ├── load-env.ps1               # Centralized environment variable loader
-│   └── README.md                  # Scripts documentation
+├── .github/                       # GitHub configuration and automation
+│   ├── chatmodes/                 # AI chat mode configurations
+│   │   └── aztf-agent.chatmode.md # Azure Terraform agent chat mode
+│   ├── instructions/              # AI assistant instructions
+│   │   └── tf.instructions.md     # Terraform-specific coding instructions
+│   ├── prompt-snippets/           # Reusable prompt components
+│   │   ├── cli-execution-instructions.md # CLI execution guidelines
+│   │   ├── coding-standards.md    # Code quality standards
+│   │   ├── commit-message.md      # Commit message templates
+│   │   ├── file_structure-update-rules.md # Rules for updating this file
+│   │   └── plan-implementation-guidelines.md # Implementation planning guides
+│   ├── prompts/                   # Structured AI prompts
+│   │   ├── 1-plan.prompt.md       # Planning phase prompt
+│   │   ├── 2-implement.prompt.md  # Implementation phase prompt
+│   │   ├── 3-apply.prompt.md      # Application phase prompt
+│   │   └── util.update-file_structure-md.prompt.md # File structure update prompt
+│   ├── workflows/                 # GitHub Actions workflows
+│   │   ├── terraform-lint.yml     # Terraform linting workflow
+│   │   └── terraform-security-msdo.yml # Microsoft security DevOps workflow
+│   └── copilot-instructions.md    # General AI assistant instructions
 │
 ├── .vscode/                       # VS Code workspace configuration
 │   ├── mcp.json                   # Model Context Protocol server configurations
 │   └── tasks.json                 # VS Code tasks for Terraform operations
 │
-├── examples/                      # Standalone Terraform example templates
-│   ├── 101-web-app-windows-dotnet/
-│   │   ├── terraform.tf           # Terraform and provider version constraints
-│   │   ├── main.tf                # Provider configuration, locals, and core resources
-│   │   ├── variables.tf           # Input variable definitions
-│   │   ├── outputs.tf             # Output value definitions
-│   │   ├── app_service.tf         # App Service specific resources
-│   │   ├── terraform.tfvars       # Variable configuration values
-│   │   ├── .env                   # Environment variables (gitignored)
-│   │   ├── .env.example           # Environment variables template
-│   │   ├── load-env.ps1           # Local script wrapper for environment loading
-│   │   └── readme.md              # Template-specific documentation
-│   │
-│   └── 201-web-app-sql-windows/
-│       ├── terraform.tf           # Terraform and provider version constraints
-│       ├── main.tf                # Provider configuration, locals, and core resources
-│       ├── variables.tf           # Input variable definitions
-│       ├── outputs.tf             # Output value definitions
-│       ├── app_service.tf         # App Service specific resources
-│       ├── sql_database.tf        # SQL Database specific resources
-│       ├── terraform.tfvars       # Variable configuration values
-│       ├── .env                   # Environment variables (gitignored)
-│       ├── .env.example           # Environment variables template
-│       ├── load-env.ps1           # Local script wrapper for environment loading
-│       └── readme.md              # Template-specific documentation
+├── docs/                          # Documentation files
+│   └── file_structure.md          # This file - workspace structure documentation
 │
-├── .gitignore                     # Git ignore file for Terraform (includes .env)
-└── README.md                      # Main repository documentation
+├── examples/                      # Standalone Terraform example templates
+│   ├── 101-web-app-windows-dotnet/ # Basic Windows App Service template
+│   └── 201-web-app-sql-windows/   # Intermediate App Service with SQL Database template
+│
+├── scripts/                       # Shared utility scripts
+│   ├── load-env.ps1               # Centralized environment variable loader
+│   └── README.md                  # Scripts documentation
+│
+├── .gitignore                     # Git ignore patterns for Terraform and secrets
+├── CODE_OF_CONDUCT.md             # Community code of conduct
+├── CONTRIBUTING.md                # Contribution guidelines
+├── LICENSE                        # MIT license file
+├── README.md                      # Main repository documentation and getting started guide
+└── SECURITY.md                    # Security policy and reporting guidelines
 ```
 
 ## File Structure Explained
@@ -496,3 +502,15 @@ Update `.vscode/tasks.json` to include tasks for your new template by following 
 
 This structure ensures that each template is completely standalone while maintaining consistency across the entire repository.
 
+## Change Log
+
+### 2025-08-29
+- Updated workspace structure to reflect current state
+- Added .devcontainer configuration with devcontainer.json
+- Added comprehensive .github directory structure with:
+  - GitHub Actions workflows (terraform-lint.yml, terraform-security-msdo.yml)
+  - AI assistant configurations (chatmodes, instructions, prompts)
+  - Reusable prompt snippets and coding standards
+- Added community files (CODE_OF_CONDUCT.md, CONTRIBUTING.md, SECURITY.md)
+- Updated examples structure to show only folder names (per rules)
+- Enhanced file descriptions with more detailed comments
