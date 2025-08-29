@@ -127,6 +127,6 @@ This template is configured to use minimal SKUs by default:
 
 - Free tier App Service does not support Always On, so it's set to false by default
 - Free tier requires 32-bit worker process
-- The web app will be accessible at `https://{prefix}-{name}-{environment}-webapp.azurewebsites.net`
-- The SQL Server name will be `{prefix}{name}sqlsvr`
-- The SQL Database name will be `{prefix}{name}sqldb`
+- The web app will be accessible at `https://{prefix}-{name}-{environment}-app.azurewebsites.net`
+- The SQL Server name will be `sql-{name}-{environment}`
+- The SQL Database name will be `sqldb-{name}-{environment}`

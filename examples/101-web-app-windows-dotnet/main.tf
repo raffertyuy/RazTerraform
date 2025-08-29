@@ -3,9 +3,10 @@ provider "azurerm" {
 }
 
 locals {
-  resource_group_name   = "${var.prefix}-${var.name}-rg"
-  app_service_plan_name = "${var.prefix}-${var.name}-plan"
-  webapp_name           = "${var.prefix}-${var.name}-${var.environment}-webapp"
+  # Azure-compliant naming with proper abbreviations and consistent pattern
+  resource_group_name   = "rg-${var.name}-${var.environment}"
+  app_service_plan_name = "asp-${var.name}-${var.environment}"
+  webapp_name           = "${var.prefix}-${var.name}-${var.environment}-app"
 
   common_tags = merge(var.tags, {
     environment = var.environment

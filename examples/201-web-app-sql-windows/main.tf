@@ -3,11 +3,12 @@ provider "azurerm" {
 }
 
 locals {
-  resource_group_name   = "${var.prefix}-${var.name}-rg"
-  app_service_plan_name = "${var.prefix}-${var.name}-plan"
-  webapp_name           = "${var.prefix}-${var.name}-${var.environment}-webapp"
-  sql_server_name       = "${var.prefix}${var.name}sqlsvr"
-  sql_database_name     = "${var.prefix}${var.name}sqldb"
+  # Azure-compliant naming with proper abbreviations and consistent pattern
+  resource_group_name   = "rg-${var.name}-${var.environment}"
+  app_service_plan_name = "asp-${var.name}-${var.environment}"
+  webapp_name           = "${var.prefix}-${var.name}-${var.environment}-app"
+  sql_server_name       = "sql-${var.name}-${var.environment}"
+  sql_database_name     = "sqldb-${var.name}-${var.environment}"
 
   common_tags = merge(var.tags, {
     environment = var.environment

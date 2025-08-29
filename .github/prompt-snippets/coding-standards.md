@@ -30,10 +30,12 @@ Key areas covered:
 ### Naming Conventions
 
 - Use descriptive, consistent naming for all infrastructure resources
-- Follow Azure native naming conventions with descriptive patterns
+- Follow Azure native naming conventions with official resource abbreviations (rg, asp, sql, sqldb, app, etc.)
 - Use snake_case for variable names, resource names, and file names
-- Use prefix-name-environment pattern: `${var.prefix}-${var.name}-${var.environment}`
-- Use meaningful resource names that indicate purpose: `web_app_rg`, `storage_account_primary`
+- Reference [Azure official abbreviation guide](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations)
+- Use Azure standard abbreviations with consistent patterns: `rg-${var.name}-${var.environment}` for resource groups
+- For globally unique resources, include prefix: `${var.prefix}-${var.name}-${var.environment}-app` for web apps
+- Use meaningful resource names that indicate purpose with proper abbreviations: `rg-myapp-prod`, `asp-myapp-prod`, `sql-myapp-prod`
 - Consider Azure service-specific naming requirements (e.g., storage accounts must be lowercase)
 
 ### Variable Management
@@ -145,5 +147,3 @@ Key areas covered:
 - Keep up-to-date with Terraform and Azure provider updates
 - Focus on creating standalone, deployable templates rather than reusable modules
 - Ensure each template is complete and includes all necessary resources for its function
-
-

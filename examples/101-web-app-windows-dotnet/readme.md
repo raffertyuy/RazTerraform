@@ -103,4 +103,4 @@ This template is configured to use the Free tier (F1 SKU) by default, which prov
 
 - Free tier does not support Always On, so it's set to false by default
 - Free tier requires 32-bit worker process
-- The web app will be accessible at `https://{prefix}-{name}-{environment}-webapp.azurewebsites.net`
+- The web app will be accessible at `https://{prefix}-{name}-{environment}-app.azurewebsites.net`
