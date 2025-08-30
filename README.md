@@ -28,6 +28,10 @@ Also see the [File Structure Documentation](docs/file_structure.md) for detailed
 
 - **[201-web-app-sql-windows](examples/201-web-app-sql-windows/)** - Windows App Service with SQL Database for data-driven .NET applications
 
+## Vibe Coding
+
+This codebase supports **vibe coding** using [GitHub Copilot](https://copilot.github.com). For more details, read the [VIBE CODING GUIDE](./VIBE_CODING_GUIDE.md).
+
 ## Getting Started
 
 ### Prerequisites
