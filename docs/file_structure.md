@@ -41,8 +41,8 @@ RazTerraform/
 ├── examples/                      # Standalone Terraform example templates
 │   ├── 101-web-app-windows-dotnet/ # Basic Windows App Service template
 │   ├── 102-static-web-app/        # Basic Azure Static Web App template
-│   ├── 103-react-app-postgres-stack/ # Intermediate ReactJS Web App with Azure Functions and PostgreSQL template
-│   └── 201-web-app-sql-windows/   # Intermediate App Service with SQL Database template
+│   ├── 201-web-app-sql-windows/   # Intermediate App Service with SQL Database template
+│   └── 202-react-app-postgres-stack/ # Intermediate ReactJS Web App with Azure Functions and PostgreSQL template
 │
 ├── scripts/                       # Shared utility scripts
 │   ├── load-env.ps1               # Centralized environment variable loader
@@ -507,7 +507,7 @@ This structure ensures that each template is completely standalone while maintai
 ## Change Log
 
 ### 2025-08-30
-- Added new 103-react-app-postgres-stack template demonstrating complete web application stack with:
+- Added new 202-react-app-postgres-stack template demonstrating complete web application stack with:
   - Linux Web App hosting ReactJS application with Node.js runtime
   - Linux Azure Functions for serverless backend functionality
   - Application Insights for monitoring and telemetry

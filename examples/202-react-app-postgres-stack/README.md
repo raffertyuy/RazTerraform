@@ -37,7 +37,7 @@ All components are configured with the lowest available pricing tiers for cost o
 
    ```bash
    git clone <repository-url>
-   cd examples/103-react-app-postgres-stack
+   cd examples/202-react-app-postgres-stack
    ```
 
 2. **Set up Azure authentication:**

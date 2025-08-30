@@ -20,12 +20,23 @@ resource "azurerm_storage_account" "default" {
   tags = local.common_tags
 }
 
+# App Service Plan for Function App (Consumption plan for cost optimization)
+resource "azurerm_service_plan" "function_plan" {
+  name                = "${var.prefix}-${var.name}-${var.environment}-func-plan"
+  resource_group_name = azurerm_resource_group.default.name
+  location            = azurerm_resource_group.default.location
+  os_type             = "Linux"
+  sku_name            = "Y1" # Consumption plan - serverless, pay-per-execution
+
+  tags = local.common_tags
+}
+
 # Linux Function App with Node.js runtime
 resource "azurerm_linux_function_app" "default" {
   name                = local.function_app_name
   location            = azurerm_resource_group.default.location
   resource_group_name = azurerm_resource_group.default.name
-  service_plan_id     = azurerm_service_plan.default.id
+  service_plan_id     = azurerm_service_plan.function_plan.id
 
   # Storage account configuration
   storage_account_name       = azurerm_storage_account.default.name
@@ -46,7 +57,7 @@ resource "azurerm_linux_function_app" "default" {
     # CORS configuration for React app
     cors {
       allowed_origins     = ["*"] # Configure specific origins in production
-      support_credentials = true
+      support_credentials = false # Cannot be true when allowed_origins includes '*'
     }
   }
 

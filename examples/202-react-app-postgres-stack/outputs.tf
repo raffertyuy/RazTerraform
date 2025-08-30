@@ -38,6 +38,16 @@ output "function_app_url" {
   value       = "https://${azurerm_linux_function_app.default.default_hostname}"
 }
 
+output "function_app_plan_name" {
+  description = "The name of the function app service plan"
+  value       = azurerm_service_plan.function_plan.name
+}
+
+output "function_app_plan_sku" {
+  description = "The SKU of the function app service plan"
+  value       = azurerm_service_plan.function_plan.sku_name
+}
+
 output "postgresql_server_fqdn" {
   description = "The FQDN of the PostgreSQL server"
   value       = azurerm_postgresql_flexible_server.default.fqdn

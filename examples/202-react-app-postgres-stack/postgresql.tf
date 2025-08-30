@@ -27,6 +27,11 @@ resource "azurerm_postgresql_flexible_server" "default" {
   public_network_access_enabled = true # Simplified for development
 
   tags = local.common_tags
+
+  # Ignore zone changes to avoid state inconsistencies
+  lifecycle {
+    ignore_changes = [zone]
+  }
 }
 
 # PostgreSQL Flexible Server Database

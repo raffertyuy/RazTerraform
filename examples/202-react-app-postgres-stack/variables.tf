@@ -18,7 +18,7 @@ variable "environment" {
 variable "location" {
   type        = string
   description = "Azure region to deploy resources"
-  default     = "Southeast Asia"
+  default     = "East US 2"
 }
 
 variable "prefix" {

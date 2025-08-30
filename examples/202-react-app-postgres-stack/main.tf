@@ -5,7 +5,7 @@ provider "azurerm" {
       recover_soft_deleted_key_vaults = true
     }
     resource_group {
-      prevent_deletion_if_contains_resources = true
+      prevent_deletion_if_contains_resources = false
     }
   }
 }
@@ -17,7 +17,7 @@ locals {
   common_tags = merge(var.tags, {
     environment = var.environment
     managed_by  = "terraform"
-    template    = "103-react-app-postgres-stack"
+    template    = "202-react-app-postgres-stack"
   })
 }
 

@@ -3,7 +3,7 @@
 
 name        = "reactapp"
 environment = "dev"
-location    = "Southeast Asia"
+location    = "East US 2"
 prefix      = "raztf"
 
 # App Service Plan configuration (Free tier for cost optimization)
